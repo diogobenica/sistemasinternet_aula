@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="js/jquery-2.0.3.js"></script>
+  </head>
+  <body>
+    Título: <input id="titulo">
+    Conteúdo: <input id="conteudo">
+    <button id="gravar">Gravar</button>
+
+    <script>
+      function enviaFormulario() {
+        var titulo = $("#titulo").val();
+        var conteudo = $("#conteudo").val();
+
+        $.post("/posts",
+          {titulo: titulo, conteudo: conteudo},
+          function(){
+            alert("Dados gravados com sucesso!");
+          }
+        );
+      }
+      $("#gravar").click(enviaFormulario);
+    </script>
+  </body>
+</html>
