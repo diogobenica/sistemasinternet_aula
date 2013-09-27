@@ -2,6 +2,14 @@
 <head>
   <meta charset="UTF-8">
   <script src="js/jquery-2.0.3.js"></script>
+  <style>
+  .post {
+    border: solid 1px #c0c0c0;
+    background-color: #f0f0f0;
+    padding: 10px;
+    margin-bottom: 5px;
+  }
+  </style>
 </head>
 <body>
 
@@ -10,7 +18,16 @@
       function(posts){
         $.each(posts,
           function(contador, post){
-            alert(post.titulo);
+            var div = $("<div>");
+            div.attr("class", "post");
+
+            var titulo = $("<h1>").html(post.titulo);
+            div.append(titulo);
+
+            var conteudo = $("<p>").html(post.conteudo);
+            div.append(conteudo);
+
+            $("body").append(div);
           }
         );
       }
