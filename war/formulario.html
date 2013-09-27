@@ -3,10 +3,34 @@
     <meta charset="UTF-8">
     <script src="js/jquery-2.0.3.js"></script>
   </head>
+  <style>
+  body {
+    background-color: #e0e0e0;
+  }
+  .formulario {
+    border: 5px solid #d0d0d0;
+    background-color: #f5f5f5;
+    padding: 25px;
+    width: 350px;
+    margin: 0 auto;
+  }
+  .titulo {
+    font-family: Arial;
+  }
+  </style>
   <body>
-    Título: <input id="titulo">
-    Conteúdo: <input id="conteudo">
-    <button id="gravar">Gravar</button>
+    <div class="formulario">
+      <h2 class="titulo">Cadastro de um novo post</h2>
+      <p>
+        Título: <input id="titulo">
+      </p>
+      <p>
+        Conteúdo: <input id="conteudo">
+      </p>
+      <p>
+        <button id="gravar">Gravar</button>
+      </p>
+    </div>
 
     <script>
       function enviaFormulario() {
