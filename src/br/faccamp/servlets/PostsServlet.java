@@ -17,7 +17,7 @@ public class PostsServlet extends HttpServlet {
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        resp.setContentType("application/json");
+        resp.setContentType("application/json; charset=utf-8");
 
         consultaObjectify(req, resp);
     }
@@ -29,9 +29,8 @@ public class PostsServlet extends HttpServlet {
             resp.getWriter().println(
                     new Gson().toJson(ProdutoRepositoryObjectify.findAll()));
         } else {
-            System.out.println(q);
             resp.getWriter().println(
-                    new Gson().toJson(ProdutoRepositoryObjectify.findByName(q)));
+                    new Gson().toJson(ProdutoRepositoryObjectify.findByTitle(q)));
 
         }
     }

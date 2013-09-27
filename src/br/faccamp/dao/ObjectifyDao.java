@@ -41,12 +41,14 @@ public class ObjectifyDao {
 
     }
 
-    public List<Post> findByName(Class<Post> class1, String queryParam) {
+    public List<Post> findByTitle(Class<Post> class1, String queryParam) {
         List<Post> lista = new ArrayList<Post>();
         Objectify ofy = ObjectifyService.begin();
-        Query<Post> q = ofy.query(Post.class).filter("nome", queryParam);
+        Query<Post> q = ofy.query(Post.class);
         for (Post post : q) {
-            lista.add(post);
+        	if(post.getTitulo().contains(queryParam)){
+        		lista.add(post);
+        	}
         }
         return lista;
     }

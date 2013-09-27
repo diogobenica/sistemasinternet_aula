@@ -18,8 +18,8 @@ public class ProdutoRepositoryObjectify {
         ObjectifyDao.getInstance().persist(post);
     }
 
-    public static List<Post> findByName(String q) {
-        return ObjectifyDao.getInstance().findByName(Post.class,q);
+    public static List<Post> findByTitle(String q) {
+        return ObjectifyDao.getInstance().findByTitle(Post.class,q);
     }
 
 }
