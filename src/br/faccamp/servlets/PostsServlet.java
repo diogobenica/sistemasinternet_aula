@@ -25,12 +25,13 @@ public class PostsServlet extends HttpServlet {
     private void consultaObjectify(HttpServletRequest req,
             HttpServletResponse resp) throws IOException {
         String q = req.getParameter("q");
+        String callback = req.getParameter("callback");
         if (q == null) {
-            resp.getWriter().println(
-                    new Gson().toJson(ProdutoRepositoryObjectify.findAll()));
+            resp.getWriter().println(callback+"("+
+                    new Gson().toJson(ProdutoRepositoryObjectify.findAll())+")");
         } else {
-            resp.getWriter().println(
-                    new Gson().toJson(ProdutoRepositoryObjectify.findByTitle(q)));
+            resp.getWriter().println(callback+"("+
+                    new Gson().toJson(ProdutoRepositoryObjectify.findByTitle(q))+")");
 
         }
     }

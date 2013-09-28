@@ -17,8 +17,10 @@
     <button>Procurar post</button>
   </div>
   <script>
-    $.get("http://localhost:8888/posts",
-      function(posts){
+    $.ajax({
+      url:"http://faccampblog.appspot.com/posts",
+      dataType: 'jsonp',
+      success: function(posts){
         $.each(posts,
           function(contador, post){
             var div = $("<div>");
@@ -34,7 +36,7 @@
           }
         );
       }
-    );
+    });
   </script>
 </body>
 </html>
