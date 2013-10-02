@@ -27,7 +27,7 @@ public class ObjectifyDao {
         Objectify ofy = ObjectifyService.begin();
         ofy.put(post);
         System.out.println("Gravou");
-        System.out.println(post.getTitulo());
+        System.out.println(post.getAutor());
     }
 
     public List<Post> findAll(Class<Post> produto) {
@@ -35,6 +35,8 @@ public class ObjectifyDao {
         Objectify ofy = ObjectifyService.begin();
         Query<Post> q = ofy.query(Post.class);
         for (Post post : q) {
+        	post.setAutor(null);
+        	post.setConteudo(null);
             lista.add(post);
         }
         return lista;
@@ -47,6 +49,18 @@ public class ObjectifyDao {
         Query<Post> q = ofy.query(Post.class);
         for (Post post : q) {
         	if(post.getTitulo().contains(queryParam)){
+        		lista.add(post);
+        	}
+        }
+        return lista;
+    }
+    
+    public List<Post> findById(Class<Post> class1, String queryParam) {
+        List<Post> lista = new ArrayList<Post>();
+        Objectify ofy = ObjectifyService.begin();
+        Query<Post> q = ofy.query(Post.class);
+        for (Post post : q) {
+        	if(post.getId() == Long.parseLong(queryParam)){
         		lista.add(post);
         	}
         }

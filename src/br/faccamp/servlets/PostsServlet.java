@@ -25,14 +25,19 @@ public class PostsServlet extends HttpServlet {
     private void consultaObjectify(HttpServletRequest req,
             HttpServletResponse resp) throws IOException {
         String q = req.getParameter("q");
+        String id = req.getParameter("id");
         String callback = req.getParameter("callback");
-        if (q == null) {
-            resp.getWriter().println(callback+"("+
-                    new Gson().toJson(ProdutoRepositoryObjectify.findAll())+")");
-        } else {
-            resp.getWriter().println(callback+"("+
+        
+        if (q != null) {
+        	resp.getWriter().println(callback+"("+
                     new Gson().toJson(ProdutoRepositoryObjectify.findByTitle(q))+")");
+        } else if(id != null) {
+            resp.getWriter().println(callback+"("+
+                    new Gson().toJson(ProdutoRepositoryObjectify.findById(id))+")");
 
+        } else {
+        	resp.getWriter().println(callback+"("+
+                    new Gson().toJson(ProdutoRepositoryObjectify.findAll())+")");
         }
     }
 
@@ -40,8 +45,10 @@ public class PostsServlet extends HttpServlet {
             throws IOException {
         resp.setContentType("application/json");
         String titulo = (req.getParameter("titulo"));
+        String subtitulo = (req.getParameter("subtitulo"));
+        String autor = (req.getParameter("autor"));
         String conteudo = (req.getParameter("conteudo"));
-        Post post = new Post(titulo, conteudo);
+        Post post = new Post(titulo, subtitulo, conteudo, autor);
         System.out.print(post.getTitulo());
         
         gravaGae(post);

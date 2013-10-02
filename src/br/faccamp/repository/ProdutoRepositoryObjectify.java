@@ -22,5 +22,8 @@ public class ProdutoRepositoryObjectify {
         return ObjectifyDao.getInstance().findByTitle(Post.class,q);
     }
 
+    public static List<Post> findById(String q) {
+        return ObjectifyDao.getInstance().findById(Post.class,q);
+    }
 }
 
