@@ -14,29 +14,40 @@
 <body>
   <div>
     Busca: <input id="campo_busca">
-    <button>Procurar post</button>
+    <button id="botao">Procurar post</button>
   </div>
+  <div id="lista_de_posts"></div>
   <script>
-    $.ajax({
-      url:"http://faccampblog.appspot.com/posts",
-      dataType: 'jsonp',
-      success: function(posts){
-        $.each(posts,
-          function(contador, post){
-            var div = $("<div>");
-            div.attr("class", "post");
+    function mostraPost(){
+      alert($(this).attr('id'));
+    }
+    function listaPosts(){
+      var valor = $("#campo_busca").val();
+      $.ajax({
+        url:"http://faccampblog.appspot.com/posts?q=" + valor,
+        dataType: 'jsonp',
+        success: function(posts){
+          $("#lista_de_posts").html("");
+          $.each(posts,
+            function(contador, post){
+              var div = $("<div>");
+              div.attr("class", "post");
 
-            var titulo = $("<h1>").html(post.titulo);
-            div.append(titulo);
+              var titulo = $("<h1>").html(post.titulo);
+              titulo.attr('id', post.id);
+              titulo.click(mostraPost);
+              div.append(titulo);
 
-            var conteudo = $("<p>").html(post.conteudo);
-            div.append(conteudo);
+              $("#lista_de_posts").append(div);
+            }
+          );
+        }
+      });
+    }
 
-            $("body").append(div);
-          }
-        );
-      }
-    });
+    listaPosts();
+
+    $("#botao").click(listaPosts);
   </script>
 </body>
 </html>
